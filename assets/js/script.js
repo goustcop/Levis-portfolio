@@ -1,5 +1,7 @@
 'use strict';
 
+pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
 
 
 // element toggle function
@@ -27,16 +29,114 @@ const modalImg = document.querySelector("[data-modal-img]");
 const modalTitle = document.querySelector("[data-modal-title]");
 const modalText = document.querySelector("[data-modal-text]");
 
+// gallery modal variables
+const galleryModalContainer = document.querySelector("[data-gallery-modal-container]");
+const galleryOverlay = document.querySelector("[data-gallery-overlay]");
+const galleryCloseBtn = document.querySelector("[data-gallery-close-btn]");
+const galleryBtn = document.querySelector("[data-gallery-btn]");
+const modalGallery = document.querySelector("[data-modal-gallery]");
+
+let currentGalleryData = null;
+
+// render PDF pages into container
+const renderPdfToCanvas = function (url, container) {
+  pdfjsLib.getDocument(url).promise.then(function (pdf) {
+    for (let p = 1; p <= pdf.numPages; p++) {
+      pdf.getPage(p).then(function (page) {
+        const viewport = page.getViewport({ scale: 1.5 });
+        const canvas = document.createElement("canvas");
+        canvas.className = "gallery-modal-canvas";
+        canvas.width = viewport.width;
+        canvas.height = viewport.height;
+        const ctx = canvas.getContext("2d");
+        ctx.fillStyle = "#1c2221";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        page.render({ canvasContext: ctx, viewport: viewport });
+        container.appendChild(canvas);
+  });
+}
+
+// readability toggle
+const readabilityBtn = document.querySelector("[data-readability-btn]");
+readabilityBtn.addEventListener("click", function () {
+  document.documentElement.classList.toggle("readable");
+  readabilityBtn.classList.toggle("active");
+});
+  });
+}
+
+// populate modal gallery
+const populateGallery = function (galleryData) {
+  modalGallery.innerHTML = "";
+  if (!galleryData) return;
+  const items = JSON.parse(galleryData);
+  for (let i = 0; i < items.length; i++) {
+    const item = items[i];
+    const wrapper = document.createElement("div");
+    wrapper.className = "modal-gallery-item";
+    if (item.type === "pdf") {
+      wrapper.classList.add("modal-gallery-item-pdf");
+      renderPdfToCanvas(item.src, wrapper);
+    } else {
+      const img = document.createElement("img");
+      img.src = item.src;
+      img.alt = item.label || "";
+      img.loading = "lazy";
+      wrapper.appendChild(img);
+    }
+    const label = document.createElement("span");
+    label.textContent = item.label || "";
+    wrapper.appendChild(label);
+    modalGallery.appendChild(wrapper);
+  }
+}
+
+// gallery modal toggle
+const galleryModalFunc = function () {
+  galleryModalContainer.classList.toggle("active");
+  galleryOverlay.classList.toggle("active");
+}
+
+// open gallery modal
+galleryBtn.addEventListener("click", function () {
+  if (currentGalleryData) {
+    populateGallery(currentGalleryData);
+    galleryModalFunc();
+  }
+});
+
+galleryCloseBtn.addEventListener("click", galleryModalFunc);
+galleryOverlay.addEventListener("click", galleryModalFunc);
+
+// gallery navigation
+const galleryPrev = document.querySelector("[data-gallery-prev]");
+const galleryNext = document.querySelector("[data-gallery-next]");
+
+galleryPrev.addEventListener("click", function () {
+  modalGallery.scrollBy({ left: -modalGallery.clientWidth, behavior: "smooth" });
+});
+
+galleryNext.addEventListener("click", function () {
+  modalGallery.scrollBy({ left: modalGallery.clientWidth, behavior: "smooth" });
+});
+
 // modal toggle function
 const testimonialsModalFunc = function () {
   modalContainer.classList.toggle("active");
   overlay.classList.toggle("active");
+  // close gallery modal if testimonials modal is closing
+  if (!modalContainer.classList.contains("active")) {
+    galleryModalContainer.classList.remove("active");
+    galleryOverlay.classList.remove("active");
+  }
 }
 
 // add click event to all modal items
 for (let i = 0; i < testimonialsItem.length; i++) {
 
   testimonialsItem[i].addEventListener("click", function () {
+    const parent = this.closest("[data-client-id]");
+    currentGalleryData = parent ? parent.dataset.gallery : null;
 
     modalImg.src = this.querySelector("[data-testimonials-avatar]").src;
     modalImg.alt = this.querySelector("[data-testimonials-avatar]").alt;
@@ -52,6 +152,24 @@ for (let i = 0; i < testimonialsItem.length; i++) {
 // add click event to modal close button
 modalCloseBtn.addEventListener("click", testimonialsModalFunc);
 overlay.addEventListener("click", testimonialsModalFunc);
+
+// open client modals from clients section
+const clientModalLinks = document.querySelectorAll("[data-client-modal]");
+for (let i = 0; i < clientModalLinks.length; i++) {
+  clientModalLinks[i].addEventListener("click", function () {
+    const clientId = this.dataset.clientModal;
+    const targetItem = document.querySelector(`[data-client-id="${clientId}"]`);
+    if (targetItem) {
+      const item = targetItem.querySelector("[data-testimonials-item]");
+      modalImg.src = item.querySelector("[data-testimonials-avatar]").src;
+      modalImg.alt = item.querySelector("[data-testimonials-avatar]").alt;
+      modalTitle.innerHTML = item.querySelector("[data-testimonials-title]").innerHTML;
+      modalText.innerHTML = item.querySelector("[data-testimonials-text]").innerHTML;
+      currentGalleryData = targetItem.dataset.gallery;
+      testimonialsModalFunc();
+    }
+  });
+}
 
 
 
