@@ -53,8 +53,10 @@ const renderPdfToCanvas = function (url, container) {
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         page.render({ canvasContext: ctx, viewport: viewport });
         container.appendChild(canvas);
+      });
+    }
   });
-}
+};
 
 // readability toggle
 const readabilityBtn = document.querySelector("[data-readability-btn]");
@@ -62,8 +64,6 @@ readabilityBtn.addEventListener("click", function () {
   document.documentElement.classList.toggle("readable");
   readabilityBtn.classList.toggle("active");
 });
-  });
-}
 
 // populate modal gallery
 const populateGallery = function (galleryData) {
