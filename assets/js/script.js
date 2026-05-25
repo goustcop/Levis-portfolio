@@ -39,11 +39,12 @@ const modalGallery = document.querySelector("[data-modal-gallery]");
 let currentGalleryData = null;
 
 // render PDF pages into container
-const renderPdfToCanvas = function (url, container) {
+const renderPdfToCanvas = function (url, container, scale) {
+  scale = scale || 0.8;
   pdfjsLib.getDocument(url).promise.then(function (pdf) {
     for (let p = 1; p <= pdf.numPages; p++) {
       pdf.getPage(p).then(function (page) {
-        const viewport = page.getViewport({ scale: 1.5 });
+        const viewport = page.getViewport({ scale: scale });
         const canvas = document.createElement("canvas");
         canvas.className = "gallery-modal-canvas";
         canvas.width = viewport.width;
@@ -76,7 +77,8 @@ const populateGallery = function (galleryData) {
     wrapper.className = "modal-gallery-item";
     if (item.type === "pdf") {
       wrapper.classList.add("modal-gallery-item-pdf");
-      renderPdfToCanvas(item.src, wrapper);
+      var scale = item.label === "About Us Post" ? 0.35 : 0.8;
+      renderPdfToCanvas(item.src, wrapper, scale);
     } else {
       const img = document.createElement("img");
       img.src = item.src;
