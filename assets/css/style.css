@@ -560,27 +560,21 @@ main {
 .service-list {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 20px;
+  gap: 0;
 }
 
 .service-item {
   position: relative;
-  background: var(--border-gradient-onyx);
-  padding: 20px;
-  border-radius: 14px;
-  box-shadow: var(--shadow-2);
+  padding: 30px 20px;
   z-index: 1;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: transform var(--transition-1);
 }
 
-.service-item::after {
-  content: "";
-  position: absolute;
-  inset: 1px;
-  background: url("../images/bg-service.png") center / cover no-repeat;
-  opacity: 0.35;
-  border-radius: inherit;
-  z-index: -1;
-  pointer-events: none;
+.service-item:hover {
+  transform: scale(1.05);
 }
 
 .service-icon-box { margin-bottom: 10px; }
@@ -1449,7 +1443,7 @@ textarea.form-input::-webkit-resizer { display: none; }
     justify-content: flex-start;
     align-items: flex-start;
     gap: 18px;
-    padding: 30px;
+    padding: 30px 25px;
   }
 
   .service-icon-box {
@@ -1780,7 +1774,7 @@ textarea.form-input::-webkit-resizer { display: none; }
 
   .service-list {
     grid-template-columns: 1fr 1fr;
-    gap: 20px 25px;
+    gap: 0;
   }
 
   /* testimonials */
