@@ -110,6 +110,34 @@ galleryBtn.addEventListener("click", function () {
 galleryCloseBtn.addEventListener("click", galleryModalFunc);
 galleryOverlay.addEventListener("click", galleryModalFunc);
 
+// portfolio modal
+const portfolioModalContainer = document.querySelector("[data-portfolio-modal-container]");
+const portfolioOverlay = document.querySelector("[data-portfolio-overlay]");
+const portfolioCloseBtn = document.querySelector("[data-portfolio-close-btn]");
+const portfolioTitle = document.querySelector("[data-portfolio-title]");
+const portfolioDesc = document.querySelector("[data-portfolio-desc]");
+const portfolioImg = document.querySelector("[data-portfolio-img]");
+
+const portfolioModalFunc = function () {
+  portfolioModalContainer.classList.toggle("active");
+  portfolioOverlay.classList.toggle("active");
+};
+
+portfolioCloseBtn.addEventListener("click", portfolioModalFunc);
+portfolioOverlay.addEventListener("click", portfolioModalFunc);
+
+document.querySelectorAll(".project-item > a").forEach(function (link) {
+  link.addEventListener("click", function () {
+    var item = this.closest(".project-item");
+    var data = JSON.parse(item.dataset.portfolio);
+    portfolioTitle.textContent = data.title;
+    portfolioDesc.textContent = data.desc;
+    portfolioImg.src = data.src;
+    portfolioImg.alt = data.title;
+    portfolioModalFunc();
+  });
+});
+
 // gallery navigation
 const galleryPrev = document.querySelector("[data-gallery-prev]");
 const galleryNext = document.querySelector("[data-gallery-next]");
