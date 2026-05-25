@@ -169,11 +169,11 @@ body { background: url("../images/bg-site.png") center / cover no-repeat fixed; 
 article {
   position: relative;
   background: var(--eerie-black-2);
-  border: 1px solid var(--jet);
   border-radius: 20px;
   padding: 15px;
   box-shadow: var(--shadow-1);
   z-index: 1;
+  border: none;
 }
 
 .separator {
@@ -577,7 +577,6 @@ article::after {
   z-index: 1;
   overflow: visible;
   transition: transform var(--transition-1);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
 }
 
 .service-bg {
