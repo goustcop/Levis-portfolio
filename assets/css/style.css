@@ -50,8 +50,8 @@
   );
   --text-gradient-yellow: linear-gradient(
     to right, 
-    hsl(45, 100%, 72%), 
-    hsl(35, 100%, 68%)
+    hsl(177, 45%, 55%), 
+    hsl(177, 32%, 44%)
   );
 
   /* solid */
@@ -368,8 +368,8 @@ article::after {
 }
 
 .avatar-box {
-  background: var(--bg-gradient-onyx);
-  border-radius: 20px;
+  background: none;
+  border-radius: 0;
 }
 
 .info-content .name {
