@@ -733,18 +733,26 @@ article::after {
   pointer-events: all;
 }
 
-.testimonials-modal {
+.testimonials-modal,
+.gallery-modal,
+.portfolio-modal {
   background: var(--eerie-black-2);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url(../images/Background.png);
+  background-size: auto, 200px 200px;
+  background-repeat: repeat, repeat;
   position: relative;
-  padding: 15px;
-  margin: 15px 12px;
   border: 1px solid var(--jet);
   border-radius: 14px;
   box-shadow: var(--shadow-5);
+  z-index: 2;
+}
+
+.testimonials-modal {
+  padding: 15px;
+  margin: 15px 12px;
   transform: scale(1.2);
   opacity: 0;
   transition: var(--transition-1);
-  z-index: 2;
 }
 
 .modal-container.active .testimonials-modal {
@@ -753,14 +761,8 @@ article::after {
 }
 
 .gallery-modal {
-  background: var(--eerie-black-2);
-  position: relative;
   padding: 15px 0;
   margin: 15px 12px;
-  border: 1px solid var(--jet);
-  border-radius: 14px;
-  box-shadow: var(--shadow-5);
-  z-index: 2;
   width: 90vw;
   max-width: 900px;
   height: 85vh;
@@ -779,13 +781,7 @@ article::after {
 }
 
 .portfolio-modal {
-  background: var(--eerie-black-2);
-  position: relative;
   margin: 15px 12px;
-  border: 1px solid var(--jet);
-  border-radius: 14px;
-  box-shadow: var(--shadow-5);
-  z-index: 2;
   width: 90vw;
   max-width: 900px;
   max-height: 85vh;
@@ -1237,6 +1233,11 @@ article::after {
 /*-----------------------------------*\
   #BLOG
 \*-----------------------------------*/
+
+.gallery-btn {
+  color: var(--orange-yellow-crayola);
+  font-weight: 700;
+}
 
 .blog-posts { margin-bottom: 10px; }
 
