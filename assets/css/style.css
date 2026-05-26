@@ -955,6 +955,10 @@ article::after {
   filter: brightness(0) invert(42%) sepia(30%) saturate(420%) hue-rotate(130deg) brightness(85%) !important;
 }
 
+.clients-item a[data-client-modal="kewl"]:hover img {
+  filter: brightness(0) invert(42%) sepia(10%) saturate(800%) hue-rotate(140deg) brightness(90%) !important;
+}
+
 
 
 
