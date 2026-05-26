@@ -1449,6 +1449,13 @@ textarea.form-input::-webkit-resizer { display: none; }
  * responsive larger than 450px screen
  */
 
+@media (max-width: 767px) {
+  .navbar {
+    bottom: auto;
+    top: 0;
+  }
+}
+
 @media (min-width: 450px) {
 
   /**
