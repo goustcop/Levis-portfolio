@@ -825,6 +825,16 @@ article::after {
   border-radius: 12px;
 }
 
+.portfolio-modal-video {
+  flex: 3;
+  max-width: 75%;
+}
+
+.portfolio-modal-video video {
+  width: 100%;
+  border-radius: 12px;
+}
+
 .modal-gallery {
   display: flex;
   flex-direction: column;
@@ -842,7 +852,8 @@ article::after {
 }
 
 .modal-gallery-item img,
-.modal-gallery-item canvas {
+.modal-gallery-item canvas,
+.modal-gallery-item video {
   max-width: 100%;
   max-height: 65vh;
   width: auto;
@@ -2082,6 +2093,7 @@ html.readable { font-family: 'Inter', sans-serif; letter-spacing: normal; }
 .readable .testimonials-item-title,
 .readable .modal-title,
 .readable .article-title,
+.readable .project-title,
 .readable .h2,
 .readable .h3,
 .readable .h4,

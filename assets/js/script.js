@@ -79,6 +79,11 @@ const populateGallery = function (galleryData) {
       wrapper.classList.add("modal-gallery-item-pdf");
       var scale = item.label === "About Us Post" ? 0.35 : 0.8;
       renderPdfToCanvas(item.src, wrapper, scale);
+    } else if (item.type === "video") {
+      const video = document.createElement("video");
+      video.src = item.src;
+      video.controls = true;
+      wrapper.appendChild(video);
     } else {
       const img = document.createElement("img");
       img.src = item.src;
@@ -116,10 +121,15 @@ const portfolioOverlay = document.querySelector("[data-portfolio-overlay]");
 const portfolioCloseBtn = document.querySelector("[data-portfolio-close-btn]");
 const portfolioTitle = document.querySelector("[data-portfolio-title]");
 const portfolioImg = document.querySelector("[data-portfolio-img]");
+const portfolioVideo = document.querySelector("[data-portfolio-video]");
 
 const portfolioModalFunc = function () {
   portfolioModalContainer.classList.toggle("active");
   portfolioOverlay.classList.toggle("active");
+  if (!portfolioModalContainer.classList.contains("active")) {
+    var vid = portfolioVideo.querySelector("video");
+    if (vid) vid.pause();
+  }
 };
 
 portfolioCloseBtn.addEventListener("click", portfolioModalFunc);
@@ -128,10 +138,23 @@ portfolioOverlay.addEventListener("click", portfolioModalFunc);
 document.querySelectorAll(".project-item > a").forEach(function (link) {
   link.addEventListener("click", function () {
     var item = this.closest(".project-item");
+    if (!item.dataset.portfolio) return;
     var data = JSON.parse(item.dataset.portfolio);
     portfolioTitle.textContent = data.title;
-    portfolioImg.src = data.src;
-    portfolioImg.alt = data.title;
+    if (data.type === "video") {
+      portfolioImg.style.display = "none";
+      portfolioVideo.hidden = false;
+      portfolioVideo.innerHTML = "";
+      var video = document.createElement("video");
+      video.src = data.src;
+      video.controls = true;
+      portfolioVideo.appendChild(video);
+    } else {
+      portfolioVideo.hidden = true;
+      portfolioImg.style.display = "";
+      portfolioImg.src = data.src;
+      portfolioImg.alt = data.title;
+    }
     portfolioModalFunc();
   });
 });

@@ -116,6 +116,12 @@
             </a>
           </li>
 
+          <li class="social-item">
+            <a href="https://www.youtube.com/@goustcop" target="_blank" class="social-link">
+              <ion-icon name="logo-youtube"></ion-icon>
+            </a>
+          </li>
+
         </ul>
 
       </div>
@@ -139,7 +145,7 @@
           </li>
 
           <li class="navbar-item">
-            <button class="navbar-link" data-nav-link>Portfolio</button>
+            <button class="navbar-link" data-nav-link>My Work</button>
           </li>
 
           <li class="navbar-item">
@@ -287,7 +293,7 @@
           </div>
         </div>
 
-        <div hidden data-client-id="filmgate" data-gallery='[{"src":"./assets/images/filmgate-graphic-1.webp","type":"image","label":"Graphic 1"},{"src":"./assets/images/filmgate-graphic-2.webp","type":"image","label":"Graphic 2"},{"src":"./assets/images/filmgate-graphic-3.webp","type":"image","label":"Graphic 3"}]'>
+        <div hidden data-client-id="filmgate" data-gallery='[{"src":"./assets/images/filmgate-graphic-1.webp","type":"image","label":"Graphic 1"},{"src":"./assets/images/filmgate-graphic-2.webp","type":"image","label":"Graphic 2"},{"src":"./assets/images/filmgate-graphic-3.webp","type":"image","label":"Graphic 3"},{"src":"./assets/images/filmgate-20th-video.mp4","type":"video","label":"20th Anniversary Video"}]'>
           <div data-testimonials-item>
             <figure class="testimonials-avatar-box">
               <img src="./assets/images/filmgate-logo.png" alt="FilmGate" width="60" data-testimonials-avatar>
@@ -568,15 +574,51 @@
 
 
 
-      <article class="portfolio" data-page="portfolio">
+      <article class="portfolio" data-page="my work">
 
         <header>
-          <h2 class="h2 article-title">Portfolio</h2>
+          <h2 class="h2 article-title">My Work</h2>
         </header>
 
         <section class="projects">
 
           <ul class="project-list">
+
+            <li class="project-item active" data-filter-item data-category="motion" data-portfolio='{"title":"Turn the TV Off — Kendrick Protest (Video Essay)","type":"video","src":"./assets/images/turn-the-tv-off.mp4"}'>
+              <a href="javascript:void(0)">
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+                  <img src="./assets/images/portfolio%20images/turn-the-tv-off-thumbnail.webp" alt="Turn the TV Off — Kendrick Protest (Video Essay)" loading="lazy">
+                </figure>
+                <h3 class="project-title">Turn the TV Off — Kendrick Protest (Video Essay)</h3>
+              </a>
+            </li>
+
+            <li class="project-item active" data-filter-item data-category="motion" data-portfolio='{"title":"WASSUP (south park animation)","type":"video","src":"./assets/images/wassup-south-park.mp4"}'>
+              <a href="javascript:void(0)">
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+                  <img src="./assets/images/portfolio%20images/wassup-thumbnail.png" alt="WASSUP (south park animation)" loading="lazy">
+                </figure>
+                <h3 class="project-title">WASSUP (south park animation)</h3>
+              </a>
+            </li>
+
+            <li class="project-item active" data-filter-item data-category="motion" data-portfolio='{"title":"Don\u0027t Have 2 Tell Me","type":"video","src":"./assets/images/dont-hv-2-tell-me.mp4"}'>
+              <a href="javascript:void(0)">
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+                  <img src="./assets/images/portfolio%20images/dont-tell-me-thumbnail.png" alt="Don't Have 2 Tell Me" loading="lazy">
+                </figure>
+                <h3 class="project-title">Don't Have 2 Tell Me</h3>
+              </a>
+            </li>
 
             <li class="project-item active" data-filter-item data-category="print" data-portfolio='{"title":"Art Club 28th Poster","desc":"Poster design for the Art Club 28th annual showcase — bold typography and striking visuals that capture the energy of student creativity.","src":"./assets/images/portfolio%20images/Art%20club%2028th%20poster.png"}'>
               <a href="javascript:void(0)">
@@ -719,6 +761,7 @@
         <div class="portfolio-modal-image">
           <img src="" alt="" data-portfolio-img>
         </div>
+        <div class="portfolio-modal-video" data-portfolio-video hidden></div>
       </div>
 
     </section>
