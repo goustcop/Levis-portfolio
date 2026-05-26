@@ -115,7 +115,6 @@ const portfolioModalContainer = document.querySelector("[data-portfolio-modal-co
 const portfolioOverlay = document.querySelector("[data-portfolio-overlay]");
 const portfolioCloseBtn = document.querySelector("[data-portfolio-close-btn]");
 const portfolioTitle = document.querySelector("[data-portfolio-title]");
-const portfolioDesc = document.querySelector("[data-portfolio-desc]");
 const portfolioImg = document.querySelector("[data-portfolio-img]");
 
 const portfolioModalFunc = function () {
@@ -131,7 +130,6 @@ document.querySelectorAll(".project-item > a").forEach(function (link) {
     var item = this.closest(".project-item");
     var data = JSON.parse(item.dataset.portfolio);
     portfolioTitle.textContent = data.title;
-    portfolioDesc.textContent = data.desc;
     portfolioImg.src = data.src;
     portfolioImg.alt = data.title;
     portfolioModalFunc();
